@@ -1,0 +1,11 @@
+const express=require('express');
+const { getUserDetails ,editUserLink,editUserAvatar, editUserName, editUserBio, editUserTheme} = require('../controllers/userController');
+const {isAuthenticated}=require('../middleware/authenticate');
+const router=express.Router();
+router.route('/getUserDetails').get(isAuthenticated,getUserDetails);
+router.route('/editUserLink').put(isAuthenticated,editUserLink);
+router.route('/editUserAvatar').put(isAuthenticated,editUserAvatar);
+router.route('/editUserName').put(isAuthenticated,editUserName);
+router.route('/editUserBio').put(isAuthenticated,editUserBio);
+router.route('/editUserTheme').put(isAuthenticated,editUserTheme);
+module.exports=router;
