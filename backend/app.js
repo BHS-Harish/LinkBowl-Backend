@@ -5,7 +5,7 @@ const cors = require('cors');
 const bodyParser=require('body-parser');
 const cookieParser=require('cookie-parser');
 
-app.use(cors({credentials:true,origin:'http://localhost:3000'}));
+app.use(cors({credentials:true,origin:'https://linkbowl.netlify.app'||'http://localhost:3000'}));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
