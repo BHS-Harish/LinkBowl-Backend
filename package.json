@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "set NODE_ENV=devolopment&& nodemon ./backend/server.js",
-    "prod": "set NODE_ENV=production&& nodemon ./backend/server.js"
+    "prod": "set NODE_ENV=production&& nodemon ./backend/server.js",
+    "build":"npm i"
   },
   "author": "BHS TECHIE",
   "license": "ISC",
