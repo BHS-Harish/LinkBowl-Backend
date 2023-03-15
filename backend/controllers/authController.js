@@ -150,7 +150,9 @@ exports.deleteAccount=catchAsyncError(async (req,res,next)=>{
         else{
             res.status(201).cookie('authToken',null,{
                 expires:new Date(Date.now()),
-                httpOnly:true
+                httpOnly:true,
+                sameSite:"none",
+                secure:true
             }).json({
                 success:true,
                 message:"User Account Deleted"
