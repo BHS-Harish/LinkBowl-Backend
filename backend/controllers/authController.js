@@ -18,7 +18,7 @@ exports.registerUser=catchAsyncError(async(req,res,next)=>{
     const validateToken=user.getValidateToken();
     user.save({validateBeforeSave:false});
     //create validation url
-    const validateUrl=`${req.protocol}://localhost:3000/auth/${validateToken}`;
+    const validateUrl=`https://linkbowl.netlify.app/auth/${validateToken}`;
     try{
         await sendEmail({
             emailId:email,
@@ -27,7 +27,7 @@ exports.registerUser=catchAsyncError(async(req,res,next)=>{
         res.status(201).json({
             success:true,
             email:"sent"
-        });
+        }).end();
     }
     catch(err){
         await User.findOneAndDelete({username:user.username});
@@ -106,7 +106,9 @@ exports.loginUser=catchAsyncError(async (req,res,next)=>{
     const token=user.getJwtToken();
     const options={
         expires:new Date(Date.now()+process.env.COOKIE_EXPIRE_TIME*24*60*60*1000),
-        httpOnly:true
+        httpOnly:true,
+        sameSite:"lax",
+        secure:true
     }
     res.status(200).cookie('authToken',token,options).json({
         success:true,
