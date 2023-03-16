@@ -22,10 +22,10 @@ module.exports = (err, req, res, next) => {
             message=`Resourse not Found ${err.path}`
             error=new Error(message) 
         }
-        if(err.name="JsonWebTokenError"){
-            message=`Jwt Token is Invalid`
-            error=new Error(message) 
-        }
+        // if(err.name="JsonWebTokenError"){
+        //     message=`Jwt Token is Invalid`
+        //     error=new Error(message) 
+        // }
         res.status(err.statusCode).json({
             success: false,
             message: error.message ||"Internal Server Error"
