@@ -132,13 +132,10 @@ exports.checkLoggedInOrNot=catchAsyncError((req,res,next)=>{
 })
 //GET-/api/v1/logout
 exports.logoutUser=(req,res,next)=>{
-    res.status(201).cookie('authToken',null,{
-        expires:new Date(Date.now()),
-        httpOnly:true
-    }).json({
+    res.status(201).clearCookie('authToken').json({
         success:true,
         message:"Logout Successfully"
-    })
+    }).end();
 }
 //GET-/api/v1/deleteaccount
 exports.deleteAccount=catchAsyncError(async (req,res,next)=>{
@@ -148,15 +145,10 @@ exports.deleteAccount=catchAsyncError(async (req,res,next)=>{
             return next(new ErrorHandler(err,400))
         }
         else{
-            res.status(201).cookie('authToken',null,{
-                expires:new Date(Date.now()),
-                httpOnly:true,
-                sameSite:"none",
-                secure:true
-            }).json({
+            res.status(201).clearCookie('authToken').json({
                 success:true,
                 message:"User Account Deleted"
-            })
+            }).end();
         }
     })
 })
