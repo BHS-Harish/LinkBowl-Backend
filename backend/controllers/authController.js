@@ -39,11 +39,11 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
 exports.checkUserName = catchAsyncError(async (req, res, next) => {
     const userName = req.body.username;
     if (userName.match(/[\W]/g) != null) {
-        return next(new ErrorHandler('Username must Contain Alphabet,Number and _', 500))
+        return next(new ErrorHandler('Username must Contain Alphabet,Number and _', 400))
     }
     const user = await User.findOne({ username: userName });
     if (user) {
-        return next(new ErrorHandler('Username already exists', 500))
+        return next(new ErrorHandler('Username already exists', 400))
     }
     res.status(200).json({
         success: true,
@@ -56,7 +56,7 @@ exports.checkEmailId = catchAsyncError(async (req, res, next) => {
     const emailId = req.body.emailId;
     const user = await User.findOne({ email: emailId });
     if (user) {
-        return next(new ErrorHandler('Email already registered', 500))
+        return next(new ErrorHandler('Email already registered', 400))
     }
     res.status(200).json({
         success: true,
