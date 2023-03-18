@@ -1,10 +1,10 @@
 const catchAsyncError = require('../middleware/catchAsyncError');
 const User = require('../model/userModel');
+const Subscriber=require('../model/subscriberModel');
 const sendEmail = require('../utils/emailVerification');
 const crypto = require('crypto');
 const ErrorHandler = require('../utils/errorHandler');
 const jwt = require('jsonwebtoken');
-const { findById } = require('../model/userModel');
 
 //POST-/api/v1/register
 exports.registerUser = catchAsyncError(async (req, res, next) => {
@@ -14,6 +14,9 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
         name,
         email,
         password
+    })
+    const result=await Subscriber.create({
+        email
     })
     const validateToken = user.getValidateToken();
     user.save({ validateBeforeSave: false });
@@ -85,7 +88,19 @@ exports.verifyEmail = catchAsyncError(async (req, res, next) => {
         message: "Your Email has been Verified..."
     })
 })
-
+//POST-/api/v1/subscribe
+exports.subscribeLinkBowl=catchAsyncError(async (req,res,next)=>{
+    const{email}=req.body;
+    const result=await Subscriber.create({
+        email
+    })
+    if(!result)
+        return next(new ErrorHandler('Subscription Failed', 400))
+    res.status(201).json({
+        success:true,
+        message:"Subscribed Successfully"
+    })
+})
 //POST-/api/v1/login
 exports.loginUser = catchAsyncError(async (req, res, next) => {
     const { username, password } = req.body;

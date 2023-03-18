@@ -406,7 +406,7 @@ function addHTML(url){
                                   <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:18px;">
                                     <tbody><tr>
                                       <td style="font-size:0;height:18px;vertical-align:middle;width:18px;">
-                                        <a href="#" target="_blank" style="color: #00AD55;">
+                                        <a href="https://www.facebook.com/profile.php?id=100090015964557" target="_blank" style="color: #00AD55;">
                                           <img alt="facebook-logo" height="18" src="https://codedmails.com/images/social/white/facebook-logo-transparent-white.png" style="border-radius:3px;display:block;" width="18" />
                                         </a>
                                       </td>
@@ -426,7 +426,7 @@ function addHTML(url){
                                   <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:18px;">
                                     <tbody><tr>
                                       <td style="font-size:0;height:18px;vertical-align:middle;width:18px;">
-                                        <a href="#" target="_blank" style="color: #00AD55;">
+                                        <a href="https://www.instagram.com/linkbowl.care/" target="_blank" style="color: #00AD55;">
                                           <img alt="instagram-logo" height="18" src="https://codedmails.com/images/social/white/instagram-logo-transparent-white.png" style="border-radius:3px;display:block;" width="18" />
                                         </a>
                                       </td>
@@ -446,7 +446,7 @@ function addHTML(url){
                                   <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:3px;width:18px;">
                                     <tbody><tr>
                                       <td style="font-size:0;height:18px;vertical-align:middle;width:18px;">
-                                        <a href="#" target="_blank" style="color: #00AD55;">
+                                        <a href="https://www.youtube.com/@linkbowl" target="_blank" style="color: #00AD55;">
                                           <img alt="youtube-logo" height="18" src="https://codedmails.com/images/social/white/youtube-logo-transparent-white.png" style="border-radius:3px;display:block;" width="18" />
                                         </a>
                                       </td>
