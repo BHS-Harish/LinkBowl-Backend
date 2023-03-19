@@ -19,18 +19,19 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
         email
     })
     const validateToken = user.getValidateToken();
-    user.save({ validateBeforeSave: false });
+    await user.save({ validateBeforeSave: false });
     //create validation url
     const validateUrl = `https://linkbowl.netlify.app/auth/${validateToken}`;
     try {
         await sendEmail({
             emailId: email,
             verifyUrl: validateUrl
+        }).then((response)=>{
+            res.status(201).json({
+                success: true,
+                email: "sent"
+            }).end();
         })
-        res.status(201).json({
-            success: true,
-            email: "sent"
-        }).end();
     }
     catch (err) {
         await User.findOneAndDelete({ username: user.username });
