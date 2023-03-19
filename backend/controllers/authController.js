@@ -15,9 +15,6 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
         email,
         password
     })
-    const result=await Subscriber.create({
-        email
-    })
     const validateToken = user.getValidateToken();
     await user.save({ validateBeforeSave: false });
     //create validation url
