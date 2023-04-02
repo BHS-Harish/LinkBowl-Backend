@@ -15,9 +15,9 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', 'https://linkbowl.netlify.app');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+    res.header("Set-Cookie", "HttpOnly;Secure;SameSite=None");
     next();
   });
-
 const auth = require('./routers/auth');
 const user=require('./routers/user');
 const client=require('./routers/client');
