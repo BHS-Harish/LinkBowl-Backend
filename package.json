@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "set NODE_ENV=devolopment&& nodemon ./backend/server.js",
     "prod": "set NODE_ENV=production&& nodemon ./backend/server.js",
-    "build":"npm i"
+    "build": "npm i"
   },
   "author": "BHS TECHIE",
   "license": "ISC",
@@ -15,6 +15,7 @@
     "body-parser": "^1.20.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "cryptr": "^6.2.0",
     "date-and-time": "^2.4.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",

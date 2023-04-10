@@ -2,9 +2,12 @@ const catchAsyncError = require('../middleware/catchAsyncError');
 const User = require('../model/userModel');
 const Subscriber=require('../model/subscriberModel');
 const sendEmail = require('../utils/emailVerification');
+const sendResetEmail = require('../utils/resetPasswordEmail');
 const crypto = require('crypto');
 const ErrorHandler = require('../utils/errorHandler');
 const jwt = require('jsonwebtoken');
+const Cryptr=require('cryptr');
+const cryptr=new Cryptr("b1a8l1a0h2a0r0i3sankar");
 
 //POST-/api/v1/register
 exports.registerUser = catchAsyncError(async (req, res, next) => {
@@ -197,4 +200,72 @@ exports.getUser = catchAsyncError(async (req, res, next) => {
             links: publicLinks
         }
     })
+})
+//POST-/api/v1/requestResetPassword
+exports.requestResetPassword = catchAsyncError(async (req, res, next) => {
+    const { email } = req.body;
+    const user = await User.findOne({ email: email, authenticated: true });
+    if (!user)
+        return next(new ErrorHandler("No User found with the given email", 404));
+    const validateToken = user.getValidateToken();
+    user.save({ validateBeforeSave: false });
+    const validateUrl = `https://linkbowl.netlify.app/reset-password/${validateToken}`;
+    try {
+        await sendResetEmail({
+            emailId: email,
+            verifyUrl: validateUrl,
+            name: user.name
+        })
+        res.status(201).json({
+            success: true,
+            email: "sent"
+        });
+    }
+    catch (err) {
+        user.validateToken = undefined;
+        user.validateTokenExpire = undefined;
+        user.save({ validateBeforeSave: false });
+        res.status(404).json({ "success": false, message: err.message }).end();
+    }
+})
+
+//POST-api/v1/verifyResetEmail
+exports.verifyResetEmail=catchAsyncError(async(req,res,next)=>{
+    const {token}=req.body;
+    const validateToken=crypto.createHash('sha256').update(token).digest('hex');
+    const user=await User.findOne({
+        validateToken,
+        validateTokenExpire:{
+            $gt:Date.now()
+        },
+        authenticated:true
+    });
+    if(!user)
+        return next(new ErrorHandler("The User Account not found",400));
+    const updatedId=cryptr.encrypt(user.id);
+    res.status(200).json({
+        success:true,
+        message:"Reset password request approved",
+        tokenId:updatedId
+    })
+})
+//POST - api/v1/resetpassword
+exports.resetPassword=catchAsyncError(async (req,res,next)=>{
+    const{token,newPassword}=req.body;
+    const userId=cryptr.decrypt(token);
+    const user=await User.findById(userId);
+    if(!user)
+        return next(new ErrorHandler("Reset Password Access Denied",404));
+    if(!newPassword)
+        return next(new ErrorHandler("Please enter Valid Password",404));
+    if(!(newPassword.length>=8))
+        return next(new ErrorHandler("Please enter Valid Password",500));
+    user.password=newPassword;
+    user.validateToken=undefined;
+    user.validateTokenExpire=undefined;
+    user.save({validateBeforeSave:false});
+    res.status(201).json({
+        success:true,
+        message:"Password Changed Sucessfully",
+    });
 })

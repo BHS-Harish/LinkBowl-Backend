@@ -1,5 +1,5 @@
 const express=require('express');
-const{registerUser, checkUserName, checkEmailId, verifyEmail,loginUser,subscribeLinkBowl, checkLoggedInOrNot, logoutUser, deleteAccount, getUser}=require('../controllers/authController');
+const{registerUser, checkUserName, checkEmailId, verifyEmail,loginUser,subscribeLinkBowl, checkLoggedInOrNot, logoutUser, deleteAccount, getUser,requestResetPassword,verifyResetEmail,resetPassword}=require('../controllers/authController');
 const {isAuthenticated} =require('../middleware/authenticate');
 const router=express.Router();
 
@@ -14,5 +14,8 @@ router.route('/subscribe').post(subscribeLinkBowl)
 router.route('/deleteaccount').get(isAuthenticated,deleteAccount);
 
 router.route('/user').post(getUser);
+router.route('/requestResetPassword').post(requestResetPassword);
+router.route('/verifyResetEmail').post(verifyResetEmail);
+router.route('/resetpassword').post(resetPassword);
 
 module.exports=router;
