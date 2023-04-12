@@ -4,15 +4,15 @@ const errorMiddleWare = require('./middleware/error');
 const cors = require('cors');
 const bodyParser=require('body-parser');
 const cookieParser=require('cookie-parser');
-//'https://linkbowl.netlify.app'
-app.use(cors({credentials:true,origin:'http://localhost:3000'}));
+//
+app.use(cors({credentials:true,origin:'https://linkbowl.netlify.app'||'http://localhost:3000'}));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Origin', 'https://linkbowl.netlify.app');
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
     next();
