@@ -1,6 +1,9 @@
 const express=require('express');
 const router=express.Router();
-const {addViews}=require('../controllers/clientController');
+const {addViews, addClicks,reportPage}=require('../controllers/clientController');
 
-router.route('/updateviews').post(addViews);
+router.route('/updateviews').put(addViews);
+router.route('/updateclicks').put(addClicks);
+router.route('/report').post(reportPage);
+
 module.exports=router;

@@ -188,10 +188,11 @@ exports.getUser = catchAsyncError(async (req, res, next) => {
     }
     const { avatar, name, bio, theme, email, links, id } = result;
     const publicLinks = links.filter(value => value.private === false);
+    const updatedId=cryptr.encrypt(id);
     res.status(201).json({
         success: true,
         user: {
-            id,
+            id:updatedId,
             avatar,
             name,
             bio,
