@@ -54,32 +54,6 @@ const userSchema = new mongoose.Schema({
             }
 		}
 	],
-    views:[
-        {
-            date:{
-                type:String,
-                required:true
-            },
-            count:{
-                type:Number,
-                required:true,
-                default:0
-            }
-        }
-    ],
-    click:[
-        {
-            date:{
-                type:String,
-                required:true
-            },
-            count:{
-                type:Number,
-                required:true,
-                default:0
-            }
-        }
-    ],
     theme:{
 		bgColor:{
 			type:String,
@@ -107,10 +81,34 @@ const userSchema = new mongoose.Schema({
 			uppercase:true
 		},
 	},
+    totalViews:{
+        type:Number,
+        default:0
+    },
+    totalClicks:{
+        type:Number,
+        default:0
+    },
+    views:{
+        type:Array,
+        default:[0,0,0,0,0,0,0]
+    },
+    clicks:{
+        type:Array,
+        default:[0,0,0,0,0,0,0]
+    },
     authenticated:{
         type:Boolean,
         default:false
     },
+    report:[
+        {
+            name:{
+                type:String,
+                required:true
+            }
+        }
+    ],
 	validateToken:String,
 	validateTokenExpire:Date,
 	createdAt:{
