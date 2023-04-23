@@ -1,7 +1,7 @@
 const User=require('../model/userModel');
 const updateClickandViews=async()=>{
     const date=new Date();
-    if(date.getSeconds()==0&&date.getMinutes()==0&&date.getHours()==0){
+    if(date.getUTCSeconds()==0&&date.getUTCMinutes()==0&&date.getUTCHours()==0){
         await User.updateMany({authenticated:true},{
             $push:{
                 views:0
