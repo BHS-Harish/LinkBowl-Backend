@@ -20,5 +20,6 @@ const updateClickandViews = async () => {
             clicks: -1
         }
     });
+    console.log("Finished");
 }
 module.exports = updateClickandViews;

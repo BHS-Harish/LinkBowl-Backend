@@ -5,7 +5,7 @@ const databaseConnection=require('./config/database');
 const cron=require('node-cron');
 const deleteUnVerfiedRecord = require('./utils/deleteUnverifiedRecord');
 const updateClickandViews=require('./utils/insightUtils');
-cron.schedule('35 16 * * *',()=>{
+cron.schedule('50 1 * * *',()=>{
     deleteUnVerfiedRecord();
     updateClickandViews();
 });
