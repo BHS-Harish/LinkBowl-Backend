@@ -9,6 +9,10 @@ cron.schedule('50 1 * * *',()=>{
     deleteUnVerfiedRecord();
     updateClickandViews();
 });
+cron.schedule('* * * * *',()=>{
+    const date=new Date();
+    console.log(date.getHours()+"-"+date.getMinutes()+"-");
+});
 dotenv.config({path:path.join(__dirname,"config/config.env")});
 databaseConnection();
 const server=app.listen(process.env.PORT,()=>{
